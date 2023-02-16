@@ -1,10 +1,10 @@
+import Topbar from "./components/topbar/Topbar"
 
-import './App.css'
 
 function App() {
   return (
     <div className="App">
-      Hello Satish from Vite!
+      <Topbar />
     </div>
   )
 }

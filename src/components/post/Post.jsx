@@ -1,35 +1,26 @@
 import "./Post.css";
-
+import { Link } from "react-router-dom";
 import React from "react";
 
-const Post = () => {
+const Post = ({ post }) => {
   return (
     <div className="post">
-      <img
-        className="postImg"
-        src="https://images.unsplash.com/photo-1675407743943-ec967a92558f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-        alt=""
-      />
+      {post.photo && <img className="postImg" src={post.photo} alt="" />}
       <div className="postInfo">
         <div className="postCats">
-          <span className="postCat">Music</span>
-          <span className="postCat">Life</span>
+          {post.categories.map((c) => (
+            <span className="postCat">{c.name}</span>
+          ))}
         </div>
-        <span className="postTitle">Lorem ipsum dolor sit amet</span>
+        <Link className="link" to={`/post/${post._id}`}>
+          <span className="postTitle">{post.title}</span>
+        </Link>
         <hr />
-        <span className="postDate">1 hour ago</span>
+        <span className="postDate">
+          {new Date(post.createdAt).toDateString()}
+        </span>
       </div>
-      <p className="postDesc">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est totam nam
-        sed molestias eos voluptatibus harum quas hic aperiam. Quas voluptate
-        sit harum cumque debitis vel ex obcaecati distinctio veritatis.Lorem
-        ipsum dolor, sit amet consectetur adipisicing elit. Est totam nam sed
-        molestias eos voluptatibus harum quas hic aperiam. Quas voluptate sit
-        harum cumque debitis vel ex obcaecati distinctio veritatis.Lorem ipsum
-        dolor, sit amet consectetur adipisicing elit. Est totam nam sed
-        molestias eos voluptatibus harum quas hic aperiam. Quas voluptate sit
-        harum cumque debitis vel ex obcaecati distinctio veritatis.
-      </p>
+      <p className="postDesc">{post.desc}</p>
     </div>
   );
 };

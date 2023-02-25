@@ -10,17 +10,18 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(()=>{
-    const fetchPost = async ()=>{
-      const res = await axios.get("/api/posts");
-      console.log(res);
+    const fetchPosts = async ()=>{
+      const res = await axios.get("api/posts");
+      setPosts(res.data);
     }
-    fetchPost();
-  },[])
+    fetchPosts();
+  },[]);
+
   return (
     <>
       <Header />
       <div className="home">
-        <Posts />
+        <Posts posts = {posts}/>
         <Sidebar />
       </div>
     </>

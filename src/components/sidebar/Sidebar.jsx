@@ -6,6 +6,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [cats, setCats] = useState([]);
@@ -37,9 +38,11 @@ const Sidebar = () => {
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
           {cats.map((c) => (
-            <li className="sidebarListItem" key={c._id}>
-              {c.name}
-            </li>
+            <Link to ={`/?cat=${c.name}`} key={c._id} className="link" >
+              <li className="sidebarListItem" >
+                {c.name}
+              </li>
+            </Link>
           ))}
         </ul>
       </div>

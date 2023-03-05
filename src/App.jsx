@@ -11,9 +11,11 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "./context/Context";
 
 function App() {
-  const user = false;
+  const {user} = useContext(Context);
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<Topbar/>}>

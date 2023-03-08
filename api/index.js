@@ -9,7 +9,7 @@ const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 
 
-mongoose.set("strictQuery", true);
+mongoose.set("strictQuery", true)
 
 dotenv.config();
 app.use(express.json());

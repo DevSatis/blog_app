@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 const Post = ({ post }) => {
+
+  const PF = "http://127.0.0.1:5173/images/"
   return (
     <div className="post">
-      {post.photo && <img className="postImg" src={post.photo} alt="" />}
+      {post.photo && <img className="postImg" src={PF + post.photo} alt="" />}
       <div className="postInfo">
         <div className="postCats">
           {post.categories.map((c) => (

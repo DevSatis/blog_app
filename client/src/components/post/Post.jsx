@@ -4,7 +4,7 @@ import React from "react";
 
 const Post = ({ post }) => {
 
-  const PF = "http://127.0.0.1:5173/images/"
+  const PF = "http://localhost:5000/images/";
   return (
     <div className="post">
       {post.photo && <img className="postImg" src={PF + post.photo} alt="" />}

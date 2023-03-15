@@ -23,6 +23,8 @@ const SinglePost = () => {
     const getPost = async () => {
       const res = await axios.get("/api/posts/" + path);
       setPost(res.data);
+      setTitle(res.data.title);
+      setDesc(res.data.desc);
     }
     getPost();
   }, [path]);
@@ -45,25 +47,34 @@ const SinglePost = () => {
             alt=""
             className="singlePostImg"
           />
-        )}
+        )}{
+          updateMode ?
+            <
+              input type="text"
+              value={title}
+              className="singlePostTitle singlePostTitleInput"
+              autoFocus
+              onChange={(e)=>setTitle(e.target.value)}
+            /> : (
 
-        <h1 className="singlePostTitle">
-          {post.title}
-          {post.username === user.username &&
-            (
-              <div className="singlePostEdit">
-                <BorderColorOutlinedIcon
-                  className="singlePostIcon"
-                  onClick={() => setUpdateMode(true)}
-                />
-                <DeleteIcon
-                  className="singlePostIcon"
-                  onClick={handleDelete}
-                />
-              </div>
-            )}
-
-        </h1>
+              <h1 className="singlePostTitle">
+                {post.title}
+                {post.username === user.username &&
+                  (
+                    <div className="singlePostEdit">
+                      <BorderColorOutlinedIcon
+                        className="singlePostIcon"
+                        onClick={() => setUpdateMode(true)}
+                      />
+                      <DeleteIcon
+                        className="singlePostIcon"
+                        onClick={handleDelete}
+                      />
+                    </div>
+                  )}
+              </h1>
+            )
+        }
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
             Author:
@@ -72,9 +83,20 @@ const SinglePost = () => {
           </span>
           <span className="singlePostDate">{new Date(post.createdAt).toDateString()}</span>
         </div>
-        <p className="singlePostDesc">
-          {post.desc}
-        </p>
+        {
+          updateMode ? (
+            <textarea  
+            className="singlePostDesc singlePostDescInput" 
+            value={desc}
+            onChange={(e)=>setDesc(e.target.value)}
+            />
+          ) : (
+            <p className="singlePostDesc">
+              {post.desc}
+            </p>
+          )
+        }
+        <button className="singlePostBtn">Update</button>
       </div>
     </div>
   );

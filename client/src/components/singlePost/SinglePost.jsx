@@ -13,6 +13,9 @@ const SinglePost = () => {
   const path = location.pathname.split("/")[2];
   const [post, setPost] = useState({});
   const { user } = useContext(Context);
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [updateMode, setUpdateMode] = useState(false);
 
   const PF = "http://localhost:5000/images/";
 
@@ -24,11 +27,11 @@ const SinglePost = () => {
     getPost();
   }, [path]);
 
-  const handleDelete =async()=>{
-    try{
-      await axios.delete(`/api/posts/${post._id}`, {data:{username: user.username}});
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/api/posts/${post._id}`, { data: { username: user.username } });
       window.location.replace("/");
-    }catch(err){
+    } catch (err) {
 
     }
   }
@@ -49,8 +52,14 @@ const SinglePost = () => {
           {post.username === user.username &&
             (
               <div className="singlePostEdit">
-                <BorderColorOutlinedIcon className="singlePostIcon" />
-                <DeleteIcon className="singlePostIcon" onClick={handleDelete} />
+                <BorderColorOutlinedIcon
+                  className="singlePostIcon"
+                  onClick={() => setUpdateMode(true)}
+                />
+                <DeleteIcon
+                  className="singlePostIcon"
+                  onClick={handleDelete}
+                />
               </div>
             )}
 

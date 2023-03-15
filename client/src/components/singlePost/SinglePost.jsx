@@ -38,6 +38,22 @@ const SinglePost = () => {
     }
   }
 
+  const handleUpdate = async(e) =>{
+    e.preventDefault();
+    try {
+      await axios.put(`/api/posts/${post._id}`, 
+      {
+        username: user.username, 
+        title, 
+        desc,
+      });
+      setUpdateMode(false);
+
+    } catch (err) {
+
+    }
+  }
+
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
@@ -58,7 +74,7 @@ const SinglePost = () => {
             /> : (
 
               <h1 className="singlePostTitle">
-                {post.title}
+                {title}
                 {post.username === user.username &&
                   (
                     <div className="singlePostEdit">
@@ -92,11 +108,15 @@ const SinglePost = () => {
             />
           ) : (
             <p className="singlePostDesc">
-              {post.desc}
+              {desc}
             </p>
           )
         }
-        <button className="singlePostBtn">Update</button>
+        {
+          updateMode &&
+          <button className="singlePostBtn" onClick={handleUpdate}>Update</button>
+        }
+        
       </div>
     </div>
   );
